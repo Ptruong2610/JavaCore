@@ -65,4 +65,5 @@ public class main {
         double bmi = weight / (height * height);
         return bmi;
     }
+
 }
