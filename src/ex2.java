@@ -8,9 +8,13 @@ public class ex2 {
         double length = scanner.nextDouble();
         System.out.println("Nhập chiều rộng hình chữu nhật: ");
         double width = scanner.nextDouble();
+        scanner.nextLine(); // chứa giá trị khi nhấn nút Enter
+//        double width = Double.parseDouble(scanner.nextLine());
+
         System.out.println("Chu vi HCN là : " +chuVi(length,width));
         System.out.println("Dien tich HCN là : " +dienTich(length,width));
-        scanner.nextLine();
+
+
 
         //ex2
         System.out.println("Nhập họ và tên : ");
