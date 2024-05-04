@@ -68,7 +68,7 @@ public class UserHandle {
         for (int i = 0; i < users .size(); i++) {
             if (users.get(i).getEmail().equals(email)&&users.get(i).getPassWord().equals(password)){
                 System.out.println("Chào mừng " + users.get(i).getUserName() + ",bạn có thể thực hiện các công việc sau:");
-                menu.menuLogin(scanner, users, users.get(i).getUserName());
+                menu.menuLogin(scanner, users, users.get(i).getEmail());
                 break;
             }
         }
@@ -115,8 +115,6 @@ public class UserHandle {
         }else if (user != null) {
             user.setUserName(newUserName);
             convertObjectToJsonFile("student.json", users);
-            System.out.println("Đỏi username thành công!Vui Lòng đăng nhập lại để tiếp tục");
-            signInUser(scanner,users);
         }
 
 
@@ -217,15 +215,4 @@ public class UserHandle {
             e.printStackTrace();
         }
     }
-
-
-    public void displayUser(ArrayList<User> users){
-        for (User user: users
-        ) {
-            System.out.println(user);
-
-        }
-    }
-
-
 }

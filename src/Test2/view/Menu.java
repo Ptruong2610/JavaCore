@@ -53,24 +53,26 @@ public class Menu {
         }
     }
 
-    public void menuLogin(Scanner scanner, ArrayList<User> users,String userName){
+    public void menuLogin(Scanner scanner, ArrayList<User> users,String email){
         UserHandle userHandle = new UserHandle();
         showMenuLogin();
         try {
             int option = Integer.parseInt(scanner.nextLine());
             switch (option){
                 case 1:
-                    User userEditUserName = userHandle.checkByUserName(users,userName);
+                    User userEditUserName = userHandle.checkByEmail(users,email);
                     userHandle.editUserName(scanner,users,userEditUserName);
+                    System.out.println("Đổi userName thành công!Mời bạn tiếp tục công việc");
+                    menuLogin(scanner,users,email);
                     break;
                 case 2:
-                    User userEditEmail= userHandle.checkByUserName(users,userName);
+                    User userEditEmail= userHandle.checkByEmail(users,email);
                     userHandle.editEmail(scanner,users,userEditEmail);
                     System.out.println("Đổi Email thành công!Mời bạn tiếp tục công việc");
-                    menuLogin(scanner,users,userName);
+                    menuLogin(scanner,users,email);
                     break;
                 case 3:
-                    User userEditPassword = userHandle.checkByUserName(users,userName);
+                    User userEditPassword = userHandle.checkByEmail(users,email);
                     userHandle.editPassword(scanner,users,userEditPassword);
                     break;
                 case 4:
@@ -82,13 +84,13 @@ public class Menu {
 
                 default:
                     System.out.println("Chọn lại!!!");
-                    menuLogin(scanner,users,userName);
+                    menuLogin(scanner,users,email);
                     break;
             }
         }catch (NumberFormatException  e) {
             System.out.println("Lỗi!Bạn phải nhập vào số");
         }finally {
-            menuLogin(scanner,users,userName);
+            menuLogin(scanner,users,email);
         }
     }
 
