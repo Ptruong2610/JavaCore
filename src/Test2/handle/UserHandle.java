@@ -2,8 +2,16 @@ package Test2.handle;
 
 import Test2.view.Menu;
 import Test2.entity.User;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -37,6 +45,7 @@ public class UserHandle {
             User user =new User(userName,email,password);
             users.add(user);
         }
+        convertObjectToJsonFile("student.json", users);
     }
 
     public void signInUser(Scanner scanner,ArrayList<User> users){
@@ -105,9 +114,11 @@ public class UserHandle {
             editUserName(scanner,users, user);
         }else if (user != null) {
             user.setUserName(newUserName);
+            convertObjectToJsonFile("student.json", users);
             System.out.println("Đỏi username thành công!Vui Lòng đăng nhập lại để tiếp tục");
             signInUser(scanner,users);
         }
+
 
     }
 
@@ -129,6 +140,7 @@ public class UserHandle {
             editEmail(scanner,users,user);
         }else if (!check &&user!=null&&checkRegexEmail(newEmail)){
             user.setEmail(newEmail);
+            convertObjectToJsonFile("student.json", users);
         }
     }
 
@@ -137,6 +149,7 @@ public class UserHandle {
         String newPassword = scanner.nextLine();
         if (user!=null&&checkRegexPassword(newPassword)){
             user.setPassWord(newPassword);
+            convertObjectToJsonFile("student.json", users);
             System.out.println("Đỏi password thành công!Vui Lòng đăng nhập lại để tiếp tục");
             signInUser(scanner,users);
         }else {
@@ -159,6 +172,50 @@ public class UserHandle {
             }
         }
 
+    }
+    //đọc file json
+    public ArrayList<User> getListObjectFromJsonFile(String fileName) {
+        try {
+            // Khởi tạo đối tượng gson
+            Gson gson = new Gson();
+
+            // Tạo đối tượng reader để đọc file
+            Reader reader = Files.newBufferedReader(Paths.get(fileName));
+
+            // Đọc thông tin từ file và binding và class
+            ArrayList<User> users =  new ArrayList<>(Arrays.asList(gson.fromJson(reader, User[].class)));
+//            Arrays.asList(gson.fromJson(reader, User[].class));
+
+            // Đọc file xong thì đóng lại
+            // Và trả về kết quả
+            reader.close();
+            return users;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    //ghi vào file gson
+    public void convertObjectToJsonFile(String fileName, Object obj) {
+        try {
+            // Tạo đối tượng gson
+            // Gson gson = new Gson();
+
+            // Nếu muốn format JSON cho đẹp
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+            // Tạo đối tượng Writer để ghi nội dung vào file
+            Writer writer = Files.newBufferedWriter(Paths.get(fileName));
+
+            // Ghi object vào file
+            gson.toJson(obj, writer);
+
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

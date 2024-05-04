@@ -1,0 +1,27 @@
+[
+  {
+    "userName": "admin",
+    "email": "smaker26101998@gmail.com",
+    "passWord": "admin"
+  },
+  {
+    "userName": "admin1",
+    "email": "smaker15101998@gmail.com",
+    "passWord": "admin1"
+  },
+  {
+    "userName": "admin4",
+    "email": "vuanh1510@gmail.com",
+    "passWord": "Smaker26$"
+  },
+  {
+    "userName": "admin5",
+    "email": "vuanh2610@gmail.com",
+    "passWord": "Smaker15@"
+  },
+  {
+    "userName": "admin7",
+    "email": "vuanh1707@gmail.com",
+    "passWord": "Smaker15@"
+  }
+]
